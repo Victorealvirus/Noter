@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,6 +21,16 @@ public class MainPage extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
+        Button newNote = (Button) findViewById(R.id.BNewNote);
+        newNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StringIPDialog
+
+            }
+        }
+
     }
 
 
@@ -46,14 +58,8 @@ public class MainPage extends Activity {
 
 
     //adding new note
-    void addItemToList(String entry){ //runs when add new note is pressed
 
-        note.add(noteCounter, entry);
-        noteCounter++;
-
-    }//add item ends
-
-    void runNewNotePage(){
+    void createNewNote(){
         String tempString = "";
         if (tempString == "")
             Toast.makeText(getBaseContext().getApplicationContext(), "There is no text in this field", Toast.LENGTH_SHORT).show();
@@ -67,6 +73,13 @@ public class MainPage extends Activity {
         String tempString = "";
         return tempString;
     }//string entry widget ends
+
+    void addItemToList(String entry){ //runs when add new note is pressed
+
+        note.add(noteCounter, entry);
+        noteCounter++;
+
+    }//add item ends
 
     //adding new note ends
 
