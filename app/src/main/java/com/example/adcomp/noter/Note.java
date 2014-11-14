@@ -20,10 +20,7 @@ public class Note {
 
     void setTheNote(String argTheNote){
 
-
         theNote = argTheNote;
-
-
 
     }//setter
 

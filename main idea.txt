@@ -1,0 +1,15 @@
+make
+
+take 1 input -> put into database
+
+display
+
+take all from database -> make a  list of objects -> put db entries into objects -> display/refresh the list
+
+edit
+
+onclick for listitem -> open edit popup(access obj) -> save that entry to the database at the right position -> refresh list
+
+delete
+
+onclick x -> confirmation popup -> remove database entry -> delete object refresh list

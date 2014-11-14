@@ -1,12 +1,14 @@
 package com.example.adcomp.noter;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -14,23 +16,26 @@ import java.util.ArrayList;
 
 public class MainPage extends Activity {
 
-    ArrayList note = new ArrayList();
-    int noteCounter = 0;
+    ArrayList<Note> note = new ArrayList<Note>();
+    int noteCounter = 0; //points to the last element(still have to figure out how to get the real value on repopulate
+    Activity mainPageActivity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
+
+
         Button newNote = (Button) findViewById(R.id.BNewNote);
         newNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StringIPDialog
-
+                runIPPopup();
             }
-        }
+        });
 
+        Toast.makeText(getBaseContext().getApplicationContext(), "Back on main page", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -59,25 +64,41 @@ public class MainPage extends Activity {
 
     //adding new note
 
-    void createNewNote(){
-        String tempString = "";
-        if (tempString == "")
-            Toast.makeText(getBaseContext().getApplicationContext(), "There is no text in this field", Toast.LENGTH_SHORT).show();
 
-        tempString = runWidgetToEnterString();
+    void runIPPopup(){
 
-        addItemToList(tempString);
-    }//open new page for note taking ends
+        final EditText noteIPET = new EditText(mainPageActivity);
+        noteIPET.setHint("Note");
 
-    String runWidgetToEnterString(){
-        String tempString = "";
-        return tempString;
-    }//string entry widget ends
+        new AlertDialog.Builder(mainPageActivity)
+                .setTitle("ENTER YOUR NOTE HERE")
+                .setView(noteIPET)
+                .setPositiveButton("DONE", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+         //               String temp = String.valueOf(noteIPET.getText());
+                            String temp = "abc";
+                        Toast.makeText(getBaseContext().getApplicationContext(), temp.length(), Toast.LENGTH_SHORT).show();
 
-    void addItemToList(String entry){ //runs when add new note is pressed
+                        if (temp.equals(""))
+                            Toast.makeText(getBaseContext().getApplicationContext(), "PLEASE ENTER NOTE", Toast.LENGTH_SHORT).show();
+                        else
 
-        note.add(noteCounter, entry);
+                            createNewNote(temp);
+                    }
+                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }//onclick cancel ends
+        }).show();
+
+    }//IP popup ends
+
+    void createNewNote(String entry){ //runs when add new note is pressed
+        //Note n1 = new Note(entry, noteCounter);
+        //note.add(n1);
         noteCounter++;
+        Toast.makeText(getBaseContext().getApplicationContext(), "new note created and the counter is " + noteCounter + " note is " + entry, Toast.LENGTH_SHORT).show();
 
     }//add item ends
 
@@ -101,7 +122,9 @@ public class MainPage extends Activity {
 
     //removing element
     void removeElement(int index){
+
         noteCounter--;
+
     }//remove element ends
 
     void deleteDBEntry(){

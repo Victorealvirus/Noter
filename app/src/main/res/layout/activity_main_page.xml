@@ -15,10 +15,10 @@
             android:layout_height="wrap_content"
             android:verticalScrollbarPosition="right"
             android:id="@+id/LVList"
-            android:layout_above="@id/BNewNote"
             android:layout_alignParentTop="true"
+            android:layout_above="@+id/BNewNote"
             android:scrollY="@dimen/activity_vertical_margin"
-            >
+            android:background="#000000">
 
         </ListView>
         <Button
